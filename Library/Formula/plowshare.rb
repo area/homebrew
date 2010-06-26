@@ -13,11 +13,10 @@ class Plowshare <Formula
   depends_on 'coreutils'
   depends_on 'gnu-sed'
   depends_on 'getopt'
-  depends_on 'wget' #plowshare actually doesn't depend on this, but I use it below to get the OSX Patch
 
   def install
     ENV["PREFIX"] = "#{prefix}"
-    system "wget http://github.com/rybesh/plowshare/raw/master/osxpatch.sh"
+    system "curl -o osxpatch.sh http://github.com/rybesh/plowshare/raw/master/osxpatch.sh"
     system "bash osxpatch.sh"
     system "bash setup.sh install"
   end
