@@ -5,6 +5,10 @@ class Getopt <Formula
   homepage 'http://software.frodo.looijaard.name/getopt/'
   md5 '02188ca68da27c4175d6e9f3da732101'
 
+  def keg_only?
+    "OS X provides the BSD getopt library, so we're making this keg-only."
+  end
+  
   def patches
     DATA
   end
