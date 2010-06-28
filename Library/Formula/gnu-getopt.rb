@@ -10,11 +10,12 @@ class GnuGetopt <Formula
   end
 
   def install
-    inreplace 'Makefile' do |contents|
-  end
     system "make install LIBCGETOPT=0 WITHOUT_GETTEXT=1 prefix=#{prefix} mandir=#{man} binaries=ggetopt"
   end
 end
+#The patch on the Makefile below does two things:
+# 1. Remove WITH_GETTEXT / WITHOUT_GETTEXT confusion
+# 2. Cause the built binary to be called ggetopt.
 
 __END__
 --- a/Makefile
