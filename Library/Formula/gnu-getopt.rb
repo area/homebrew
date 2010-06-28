@@ -5,25 +5,30 @@ class GnuGetopt <Formula
   homepage 'http://software.frodo.looijaard.name/getopt/'
   md5 '02188ca68da27c4175d6e9f3da732101'
 
-  def keg_only?
-    "OS X provides the BSD getopt library, so we're making this keg-only."
-  end
-  
   def patches
     DATA
   end
 
   def install
-    system "make install LIBCGETOPT=0 WITHOUT_GETTEXT=1 prefix=#{prefix} mandir=#{man}"
+    inreplace 'Makefile' do |contents|
+  end
+    system "make install LIBCGETOPT=0 WITHOUT_GETTEXT=1 prefix=#{prefix} mandir=#{man} binaries=ggetopt"
   end
 end
 
 __END__
-diff --git a/Makefile b/Makefile
-index f930a28..7dbf870 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -33,7 +33,7 @@ MSGFMT=msgfmt
+@@ -17,7 +17,7 @@
+ WITHOUT_GETTEXT=0
+ 
+ # For creating the archive
+-PACKAGE=getopt
++PACKAGE=ggetopt
+ VERSION=1.1.4
+ BASENAME=$(PACKAGE)-$(VERSION)
+ UNLIKELYNAME=a8vwjfd92
+@@ -33,7 +33,7 @@
  LANGUAGES = cs de es fr it ja nl pt_BR
  MOFILES:=$(patsubst %,po/%.mo,$(LANGUAGES))
  
@@ -32,7 +37,32 @@ index f930a28..7dbf870 100644
  ifeq ($(LIBCGETOPT),0)
  CPPFLAGS+=-I./gnu 
  endif
-@@ -75,7 +75,7 @@ install_doc:
+@@ -53,7 +53,7 @@
+ 
+ objects=$(sources:.c=.o)
+ 
+-binaries=getopt
++binaries=ggetopt
+ 
+ .PHONY: all clean realclean 
+ all: $(binaries) all_po
+@@ -61,12 +61,12 @@
+ clean: clean_po
+ 	-$(RM) $(objects) $(binaries) 
+ 
+-getopt: $(objects)
++ggetopt: $(objects)
+ 	$(CC) $(LDFLAGS) -o $@ $(objects)
+ 
+-install: getopt install_po
++install: ggetopt install_po
+ 	$(INSTALL) -m 755 -d $(DESTDIR)$(bindir) $(DESTDIR)$(man1dir)
+-	$(INSTALL) -m 755 getopt $(DESTDIR)$(bindir)
++	$(INSTALL) -m 755 ggetopt $(DESTDIR)$(bindir)
+ 	$(INSTALL) -m 644 getopt.1 $(DESTDIR)$(man1dir)
+ 
+ install_doc:
+@@ -75,7 +75,7 @@
  	                  getopt-test.bash getopt-test.tcsh \
  	           $(DESTDIR)$(getoptdir)
  
