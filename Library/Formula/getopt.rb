@@ -11,7 +11,6 @@ class Getopt <Formula
 
   def install
     system "make install LIBCGETOPT=0 WITHOUT_GETTEXT=1 prefix=#{prefix} mandir=#{man}"
-    man1.install 'getopt.1'
   end
 end
 
