@@ -13,11 +13,29 @@ class Plowshare <Formula
   depends_on 'coreutils'
   depends_on 'gnu-sed'
   depends_on 'getopt'
+  def patches
+    DATA
+  end
 
   def install
     ENV["PREFIX"] = "#{prefix}"
-    system "curl -o osxpatch.sh http://github.com/rybesh/plowshare/raw/master/osxpatch.sh"
-    system "bash osxpatch.sh"
+# This is the old way of getting the old patch. This new patch is far more elegant.
+#    system "curl -o osxpatch.sh http://github.com/rybesh/plowshare/raw/master/osxpatch.sh"
+#    system "bash osxpatch.sh"
     system "bash setup.sh install"
   end
 end
+#This patch makes sure GNUtools are used on OSX. 
+__END__
+--- a/src/lib.sh
++++ b/src/lib.sh
+@@ -1,4 +1,8 @@
+ #!/bin/bash
++shopt -s expand_aliases
++alias sed='gsed'
++alias head='ghead'
+ #
+ # This file is part of Plowshare.
+ #
+
+
