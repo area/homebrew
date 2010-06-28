@@ -12,7 +12,7 @@ class Plowshare <Formula
   depends_on 'aview'
   depends_on 'coreutils'
   depends_on 'gnu-sed'
-  depends_on 'getopt'
+  depends_on 'gnu-getopt'
  
   def patches
     DATA
@@ -35,7 +35,7 @@ __END__
 +shopt -s expand_aliases
 +alias sed='gsed'
 +#gsed Needed for almost everything
-+#alias readlink='greadlink'
++alias getopt='ggetopt'
 +alias head='ghead'
 +#ghead Needed for mediafire at least. Readlink not needed
  #
