@@ -13,6 +13,7 @@ class Plowshare <Formula
   depends_on 'coreutils'
   depends_on 'gnu-sed'
   depends_on 'getopt'
+ 
   def patches
     DATA
   end
@@ -29,13 +30,15 @@ end
 __END__
 --- a/src/lib.sh
 +++ b/src/lib.sh
-@@ -1,4 +1,8 @@
+@@ -1,4 +1,10 @@
  #!/bin/bash
 +shopt -s expand_aliases
 +alias sed='gsed'
++#gsed Needed for almost everything
++#alias readlink='greadlink'
 +alias head='ghead'
++#ghead Needed for mediafire at least. Readlink not needed
  #
  # This file is part of Plowshare.
  #
-
 
