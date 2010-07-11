@@ -20,9 +20,6 @@ class Plowshare <Formula
 
   def install
     ENV["PREFIX"] = "#{prefix}"
-# This is the old way of getting the old patch. This new patch is far more elegant.
-#    system "curl -o osxpatch.sh http://github.com/rybesh/plowshare/raw/master/osxpatch.sh"
-#    system "bash osxpatch.sh"
     system "bash setup.sh install"
   end
 end
