@@ -32,7 +32,7 @@ __END__
 +shopt -s expand_aliases
 +alias sed='gsed'
 +#gsed Needed for almost everything
-+alias getopt='ggetopt'
++alias getopt='`brew --prefix gnu-getopt`/bin/getopt'
 +alias head='ghead'
 +#ghead Needed for mediafire at least. Readlink not needed
  #
