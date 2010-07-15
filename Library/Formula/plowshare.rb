@@ -1,7 +1,7 @@
 require 'formula'
 
 class Plowshare <Formula
-  head 'http://plowshare.googlecode.com/svn/trunk/', :using => :svn
+  head 'http://plowshare.googlecode.com/svn/trunk/'
   homepage 'http://code.google.com/p/plowshare'
 
   depends_on 'recode'
@@ -12,16 +12,18 @@ class Plowshare <Formula
   depends_on 'coreutils'
   depends_on 'gnu-sed'
   depends_on 'gnu-getopt'
- 
+  
   def patches
     DATA
   end
 
   def install
-    ENV["PREFIX"] = "#{prefix}"
+    ENV["PREFIX"] = prefix
     system "bash setup.sh install"
   end
 end
+
+
 #This patch makes sure GNUtools are used on OSX. 
 #gnu-getopt is keg-only hence the backtick expansion.
 #These aliases only exist for the duration of plowshare,
